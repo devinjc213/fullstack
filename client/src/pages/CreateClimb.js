@@ -55,7 +55,7 @@ function CreateClimb() {
             checked={rope === "rope"}
             onChange={(e) => setRope(e.target.value)}
           />
-          <label for="radioRope">Rope</label>
+          <label htmlFor="radioRope">Rope</label>
           <input
             type="radio"
             name="rope"
@@ -63,7 +63,7 @@ function CreateClimb() {
             value="boulder"
             onChange={(e) => setRope(e.target.value)}
           />
-          <label for="radioBoulder">Boulder</label>
+          <label htmlFor="radioBoulder">Boulder</label>
         </div>
         <div className="grade-container">
           <label className="grade-label">Select a grade: </label>
