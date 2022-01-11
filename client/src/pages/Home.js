@@ -20,7 +20,7 @@ function Home() {
           <div className="post">
             <div className="name"> {value.name} </div>
             <div className="grade"> {value.grade} </div>
-            <div className="rope"> {value.rope ? "Rope" : "Boulder"} </div>
+            <div className="rope">{value.rope}</div>
             <div className="user"> {value.user} </div>
             <br />
           </div>

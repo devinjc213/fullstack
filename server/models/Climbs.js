@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
     rope: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     user: {

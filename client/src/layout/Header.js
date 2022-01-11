@@ -31,7 +31,7 @@ const ListContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 1rem;
-  margin: 3rem;
+  margin: 1rem;
   background-color: #947e73;
   opacity: 60%;
   border-radius: 5px;
@@ -45,7 +45,7 @@ const ListContainerShrink = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 1rem;
-  margin: 3rem;
+  margin: 1rem;
   background-color: #947e73;
   opacity: 60%;
   border-radius: 5px;
@@ -79,7 +79,13 @@ const NavIcon = styled.div`
 
 function Header() {
   const [showHeader, setShowHeader] = useState(false);
+  const [initialRender, setInitialRender] = useState(true);
   const mountain = <FontAwesomeIcon icon={faMountain} />;
+
+  const handleClick = () => {
+    setShowHeader(!showHeader);
+    setInitialRender(false);
+  };
 
   return (
     <>
@@ -90,7 +96,8 @@ function Header() {
               src={require("../assets/imgs/nav-icon.png")}
               height="40"
               width="40"
-              onClick={() => setShowHeader(!showHeader)}
+              alt=""
+              onClick={handleClick}
             />
           </NavIcon>
         </IconContainer>
@@ -99,14 +106,18 @@ function Header() {
           <ListContainer>
             <HeaderList>
               {mountain}
-              <Link to="/">Home</Link>
+              <Link to="/" onClick={() => setShowHeader(!showHeader)}>
+                Home
+              </Link>
             </HeaderList>
             <HeaderList>
               {mountain}
-              <Link to="/newclimb">Record New Climb</Link>
+              <Link to="/newclimb" onClick={() => setShowHeader(!showHeader)}>
+                Record New Climb
+              </Link>
             </HeaderList>
           </ListContainer>
-        ) : (
+        ) : initialRender ? null : (
           <ListContainerShrink>
             <HeaderList>
               {mountain}
