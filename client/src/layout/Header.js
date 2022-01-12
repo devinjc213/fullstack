@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMountain } from "@fortawesome/free-solid-svg-icons";
@@ -37,21 +37,18 @@ const ListContainer = styled.div`
   border-radius: 5px;
   box-shadow: 5px 5px 5px;
   position: relative;
-  animation: ${grow} 0.25s;
-`;
-
-const ListContainerShrink = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 1rem;
-  margin: 1rem;
-  background-color: #947e73;
-  opacity: 60%;
-  border-radius: 5px;
-  box-shadow: 5px 5px 5px;
-  position: relative;
-  animation: ${shrink} 0.25s 1 linear forwards;
+  ${(props) =>
+    props.toggle
+      ? css`
+          animation: ${grow} 0.25s;
+        `
+      : props.initialRender
+      ? css`
+          visibility: hidden !important;
+        `
+      : css`
+          animation: ${shrink} 0.25s 1 linear forwards;
+        `};
 `;
 
 const HeaderList = styled.div`
@@ -101,34 +98,20 @@ function Header() {
             />
           </NavIcon>
         </IconContainer>
-
-        {showHeader ? (
-          <ListContainer>
-            <HeaderList>
-              {mountain}
-              <Link to="/" onClick={() => setShowHeader(!showHeader)}>
-                Home
-              </Link>
-            </HeaderList>
-            <HeaderList>
-              {mountain}
-              <Link to="/newclimb" onClick={() => setShowHeader(!showHeader)}>
-                Record New Climb
-              </Link>
-            </HeaderList>
-          </ListContainer>
-        ) : initialRender ? null : (
-          <ListContainerShrink>
-            <HeaderList>
-              {mountain}
-              <Link to="/">Home</Link>
-            </HeaderList>
-            <HeaderList>
-              {mountain}
-              <Link to="/newclimb">Record New Climb</Link>
-            </HeaderList>
-          </ListContainerShrink>
-        )}
+        <ListContainer toggle={showHeader} initialRender={initialRender}>
+          <HeaderList>
+            {mountain}
+            <Link to="/" onClick={() => setShowHeader(!showHeader)}>
+              Home
+            </Link>
+          </HeaderList>
+          <HeaderList>
+            {mountain}
+            <Link to="/newclimb" onClick={() => setShowHeader(!showHeader)}>
+              Record New Climb
+            </Link>
+          </HeaderList>
+        </ListContainer>
       </HeaderContainer>
     </>
   );
